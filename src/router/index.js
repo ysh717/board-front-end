@@ -17,6 +17,14 @@ const routes = [
     path: '/updateform',
     component: () => import(/* webpackChunkName: "board" */ '../views/board/UpdateForm.vue')
   },
+  {
+    path: '/auth/login',
+    component: () => import(/* webpackChunkName: "auth" */ '../views/auth/Login.vue')
+  },
+  {
+    path: '/auth/join',
+    component: () => import(/* webpackChunkName: "auth" */ '../views/auth/Join.vue')
+  },
 ]
 
 const router = createRouter({
