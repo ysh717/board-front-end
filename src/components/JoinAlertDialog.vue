@@ -1,9 +1,10 @@
 <template>
-    <div class="card">
-        <div class="card-header">
-            Join
-        </div>
-        <div class="card-body">
+    <ModalDialogTemplate style="width:400px">
+        <template v-slot:header>
+            회원가입
+        </template>
+
+        <template v-slot:body>
             <div class="form-group">
                 <label class="form-label">User ID</label>
                 <input type="text" class="form-control" v-model="user.id"/>
@@ -28,18 +29,23 @@
                 <label class="col-form-label">User Email</label>
                 <input type="text" class="form-control" v-model="user.email"/>
             </div>
-            <button class="btn btn-info btn-sm" v-on:click="handleJoin">가입</button>        
-        </div>
+            <button class="btn btn-info btn-sm" v-on:click="handleJoin">가입</button>       
+        </template>
 
+        <template v-slot:footer>
+            <button class="btn btn-danger btn-sm" @click="$emit('close')">닫기</button>
+        </template>
         <AlertDialog v-if="alertDialog" :message="alertDialogMessage" :loading="loading" @close="alertDialog=false"/>
-    </div>
+    </ModalDialogTemplate>
 </template>
 
 <script setup>
+    import ModalDialogTemplate from '@/components/ModalDialogTemlate.vue';
     import {reactive, ref} from 'vue';
     import apiAuth from "@/apis/auth";
     import AlertDialog from "@/components/AlertDialog.vue";
     import {useRouter} from "vue-router";
+    import {defineProps} from "vue";
 
     const router = useRouter();
 
@@ -73,11 +79,8 @@
         }
 
         loading.value = false;
-
-        
     }
 </script>
 
 <style scope>
-
 </style>

@@ -1,38 +1,34 @@
 <template>
-    <div class="card">
-        <div class="card-header">
-            Read
-        </div>
-        <div class="card-body">
-            <div v-if="board != null">
-                <div class="d-flex">
-                    <div>
-                        <p>bno: {{board.bno}}</p>
-                        <p>btitle: {{board.btitle}}</p>
-                        <p>bcontent: {{board.bcontent}}</p>
-                        <p>mid: {{board.mid}}</p>
-                        <p>bdate: {{new Date(board.bdate).toLocaleDateString}}</p>
-                        <p>bhitcount: {{board.bhitcount}}</p>
-                        <p v-if="board.battachoname != null">
-                            battachoname: {{board.battachoname}}
-                            <button @click="downloadBattach" class="btn btn-info btn-sm ml-2">다운로드</button>
-                        </p>
-                    </div>
-                    <div class="ml-5">
-                        <img v-if="board.battachoname != null" :src="battach" width="300"/>
-                    </div>
+    <div class="col-2"></div>
+    <div class="div1 mt-5 col-8" style="margin:0 auto;">
+        <div v-if="board != null">
+            <div class="d-flex col-12">
+                <div class="ml-5 col-6">
+                    <img class="col-12 mt-3" v-if="board.battachoname != null" :src="battach" style="max-height:650px"/>
                 </div>
-
-                <div>
-                    <router-link :to="`/`" 
-                        class="btn btn-info btn-sm mr-2">목록</router-link>
-                    <router-link :to="`/updateform?bno=${bno}`" 
-                        class="btn btn-info btn-sm mr-2">수정</router-link>
-                    <button class="btn btn-info btn-sm mr-2" @click="handleRemove">삭제</button>
+                <div class="col-6 mt-3" style="font-size:20px">
+                    <p>게시물 번호: {{board.bno}}</p>
+                    <p>제목: {{board.btitle}}</p>
+                    <p>내용: {{board.bcontent}}</p>
+                    <p>작성자: {{board.mid}}</p>
+                    <p>게시날짜: {{new Date(board.bdate).toLocaleDateString()}}</p>
+                    <p>조회수: {{board.bhitcount}}</p>
+                    <p v-if="board.battachoname != null">
+                        사진: {{board.battachoname}}
+                        <button @click="downloadBattach" class="btn btn-info btn-sm ml-2">다운로드</button>
+                    </p>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center mt-3 mb-3">
+                <router-link :to="`/`" 
+                    class="btn btn-info btn-sm mr-2">목록</router-link>
+                <router-link v-if="board.mid == $store.state.userId" :to="`/updateform?bno=${bno}`" 
+                    class="btn btn-success btn-sm mr-2">수정</router-link>
+                <button v-if="board.mid == $store.state.userId" class="btn btn-danger btn-sm mr-2" @click="handleRemove">삭제</button>
             </div>
         </div>
     </div>
+    <div class="col-2"></div>
 </template>
 
 <script setup>
@@ -84,5 +80,8 @@
 </script>
 
 <style scope>
-
+    .div1{
+        border: solid 2px;
+        border-radius: 2rem;
+    }  
 </style>

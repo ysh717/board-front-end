@@ -1,9 +1,11 @@
 import axios from "axios";
 
-async function getBoardList(pageNo=1){
+async function getBoardList(searchWord){
     let response = null;
     try {
-        response = await axios.get("/list");
+        console.log(searchWord);
+        response = await axios.get("/list", {params:{searchWord}});
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -16,7 +18,6 @@ async function downloadBoardAttach(bno){
     try{
         const response = await axios.get(`/battach/${bno}`, {responseType: "blob"});
         blob = response.data;
-        console.log("~~~~~~~~~");
     }catch(error){
         console.log(error);
     }

@@ -40,6 +40,9 @@
     import { useRouter} from "vue-router";
     import apiBoard from "@/apis/board";
     import DialogA from "../Dialog/DialogA.vue"
+    import {useStore} from "vuex";
+
+    const store = useStore();
 
     const router = useRouter();
 
@@ -71,7 +74,7 @@
         const multipartFormData = new FormData();
         multipartFormData.append("btitle", board.btitle);
         multipartFormData.append("bcontent", board.bcontent);
-        multipartFormData.append("mid", "user");
+        multipartFormData.append("mid", store.state.userId);
         if(battach.value.files.length != 0){
             multipartFormData.append("battach", battach.value.files[0]);
         }
