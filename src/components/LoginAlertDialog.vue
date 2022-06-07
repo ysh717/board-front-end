@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-group">
                     <label for="userPassword" class="col-form-label">User Password</label>
-                    <input type="text" class="form-control" v-model="user.password" />
+                    <input type="password" class="form-control" v-model="user.password" />
                 </div>
                 <button class="btn btn-info btn-sm" v-on:click="handleLogin">로그인</button>
             </div>
@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-    import {reactive, ref} from "vue";
+    import {reactive, ref,defineEmits} from "vue";
     import {useStore} from "vuex";
     import apiAuth from "@/apis/auth";
     import AlertDialog from "@/components/AlertDialog.vue"
@@ -38,6 +38,8 @@
     const store = useStore();
     const router = useRouter();
 
+    const emit = defineEmits("login-event");
+    
     const loginAlertDialog = ref(false);
     const alertDialog = ref(false);
     const alertDialogMessage = ref("");
@@ -56,7 +58,7 @@
         const result = await apiAuth.login(user);
         if(result === "success"){
             console.log("로그인성공");
-            loginAlertDialog.value = false;
+            emit("login-event", false);
             alertDialogMessage.value = "로그인 성공";
             router.push("/");
         } else if( result === "fail-401"){
@@ -65,6 +67,7 @@
             alertDialogMessage.value = "로그인 실패 : 네트워크 에러";
         }
         loading.value = false;
+        loginAlertDialog.value = false;
 
     }
 

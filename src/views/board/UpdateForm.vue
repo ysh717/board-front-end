@@ -1,33 +1,34 @@
 <template>
     <div class="card">
         <div class="card-header">
-            UpdateForm
+            게시글 수정
         </div>
         <div class="card-body">
             <form v-if="board" v-on:submit.prevent="handleUpdate">
-                <div class="form-group row">
+                <div>
+                    <div class="form-group row">
                     <label class="col-sm-2 col-form-label">제목</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" v-model="board.btitle"/>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">내용</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" v-model="board.bcontent"/>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">내용</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="board.bcontent"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">첨부그림</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control-file" ref="newBattach" @change="previewImg"/>
+                        </div>
+                    </div>
+
+                    <div>
+                        <img :src="battach" width="200"/>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">첨부그림</label>
-                    <div class="col-sm-10">
-                        <input type="file" class="form-control-file" ref="newBattach" @change="previewImg"/>
-                    </div>
-                </div>
-
-                <div>
-                    <img :src="battach" width="200"/>
-                </div>
-
                 <div class="form-group row mt-3">
                     <div class="col-sm-12 d-flex justify-content-center">
                         <input type="submit" class="btn btn-primary btn-sm mr-2" value="수정"/>

@@ -2,6 +2,7 @@ import axios from "axios";
 import store from "@/store"
 
 async function join(user){
+    console.log("회원가입 실행");
     try {
         const response = await axios.post("/member/join", {
             //서버로 넘기는 키는 dto와 일치해야한다
@@ -11,6 +12,7 @@ async function join(user){
             mrole: user.role,
             memail: user.email
         });
+        console.log("회원가입 실행2");
         return response.data.result; //success, duplicated, fail
     } catch (error) {
         console.log(error);

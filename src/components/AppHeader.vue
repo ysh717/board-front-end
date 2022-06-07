@@ -11,7 +11,7 @@
     </div>
   </nav>
   <div>
-    <LoginAlertDialog v-if="loginAlertDialog" @close="loginAlertDialog=false"/>
+    <LoginAlertDialog v-if="loginAlertDialog" @close="loginAlertDialog=false" @login-event="handleLoginDialog"/>
     <JoinAlertDialog v-if="joinAlertDialog" @close="joinAlertDialog=false"/>
   </div>
 </template>
@@ -32,6 +32,11 @@
   async function handleLogout(){
     await apiAuth.logout();
     router.push("/");
+  }
+
+  function handleLoginDialog(data){
+    loginAlertDialog.value = data;
+    console.log(loginAlertDialog.value);
   }
 
 </script>

@@ -52,6 +52,7 @@
     const alertDialog =ref(false);
     const alertDialogMessage = ref("");
     const loading = ref(false);
+    const joinAlertDialog =ref(false);
 
     const user =reactive({
         id: "user",
@@ -66,15 +67,19 @@
         loading.value = true;
 
         const result = await apiAuth.join(user);
-
+        console.log(result);
         if(result === "success"){
+            console.log("성공");
             alertDialogMessage.value = "회원 가입 성공";
             router.push("/");
-        } else if(result =="duplicated"){
+        } else if(result ==="duplicated"){
+            console.log("중복");
             alertDialogMessage.value = "회원 가입 실패 : 아이디 중복";
-        } else if(result == "fail"){
+        } else if(result === "fail"){
+            console.log("실패");
             alertDialogMessage.value = "회원 가입 실패 : 서버측 오류 ";
         } else {
+            console.log("실패2");
             alertDialogMessage.value = "회원 가입 실패 : 네트워크 오류";
         }
 
